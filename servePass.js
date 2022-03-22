@@ -7,31 +7,48 @@ const passengers = [{name: "Julie Benchuk", paid: true},
 
 //return TRUE if person paid for the ticket//
 function checkPaid(passengers) {
-    return (passengers.paid);
-}
-
-//return FALSE if there is person who isn't allowed to fly//
-function checkBlackList(passengers) {
     for (var i = 0; i < passengers.length; i++) {
-        if (passengers[i].name === "Daria Khamenya") {
+        if(!passengers[i].paid) {
             return false;
         }
     }
     return true;
 }
 
-// function onBlackList(passengers) {
-//     return (passengers.name === "Daria Khamenya");
-// }
-
-//list of passengers to log//
-function printPassengers(passengers) {
+//return FALSE if there is person who isn't allowed to fly//
+function checkBlackList(passengers) {
     for (var i = 0; i < passengers.length; i++) {
-        console.log(passengers[i].name);
-        return false;
+        if (checkNoBlackList(passengers[i].name)) {
+            return false;
+        }
     }
     return true;
 }
+
+//list of passengers//
+function printPassenger(passenger) {
+    var message = passenger.name;
+    if (passenger.paid === true) {
+        message = message + " has paid";
+    } else {
+        message = message + " has not paid";
+    }
+    console.log(message);
+    return false;
+}
+
+
+
+//return TRUE if a person in black list//
+function checkNoBlackList(passenger) {
+    return (passenger.name === "Daria Khamenya");
+}
+
+//return TRUE if a person didn't pay//
+function checkNotPaid(passender) {
+    return (!passender.paid);
+}
+
 
 function processPassengers(passengers, testFunction) {
     for (var i = 0; i < passengers.length; i++) {
@@ -43,16 +60,17 @@ function processPassengers(passengers, testFunction) {
 }
 
 //log message//
-let allCanFly = processPassengers(passengers, checkBlackList);
+let allCanFly = processPassengers(passengers, checkNoBlackList);
 if (!allCanFly) {
     console.log("The plane can't take off: there is a blacklisted passengers.");
 }
 
 //log message//
-let allPaid = processPassengers(passengers, checkPaid);
+let allPaid = processPassengers(passengers, checkNotPaid);
 if (!allPaid) {
     console.log("The plane can't take off: we have a passenger, who didn't pay for a ticket.");
 }
+processPassengers(passengers, printPassenger);
 
 
 
