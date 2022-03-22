@@ -1,10 +1,10 @@
-const passengers = [{name: "Julie Benchuk", paid: true},
-    {name: "Anastasia Skokova", paid: true},
-    {name: "Alina Magistrova", paid: false},
-    {name: "Igor Stalyarow", paid: true},
-    {name: "Daria Khamenya", paid: false}
+const passengers = [{name: "Julie Benchuk", paid: true, ticket: "firstclass"},
+    {name: "Anastasia Skokova", paid: true, ticket: "firstclass"},
+    {name: "Alina Magistrova", paid: false, ticket: "businessclass"},
+    {name: "Igor Stalyarow", paid: true, ticket: "businessclass"},
+    {name: "Daria Khamenya", paid: false, ticket: "businessclass"}
 ];
-
+//                                     CHECK PAYMENT AND PROHIBITION         //
 //return TRUE if person paid for the ticket//
 function checkPaid(passengers) {
     for (var i = 0; i < passengers.length; i++) {
@@ -36,7 +36,6 @@ function printPassenger(passenger) {
     console.log(message);
     return false;
 }
-
 
 
 //return TRUE if a person in black list//
@@ -71,6 +70,22 @@ if (!allPaid) {
     console.log("The plane can't take off: we have a passenger, who didn't pay for a ticket.");
 }
 processPassengers(passengers, printPassenger);
+
+//                                             SERVICE                                 //
+
+function serveCustomer(passenger) {
+    if (passenger.ticket === "businessclass") {
+        alert("Would you like a beer or wine?");
+    } else {
+      alert("Your choice is mineral water, cola or juice.");  
+    }
+}
+function f() {
+    
+}
+
+
+
 
 
 
