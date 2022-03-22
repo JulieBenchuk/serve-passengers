@@ -1,7 +1,7 @@
 const passengers = [{name: "Julie Benchuk", paid: true, ticket: "firstclass"},
     {name: "Anastasia Skokova", paid: true, ticket: "firstclass"},
     {name: "Alina Magistrova", paid: false, ticket: "businessclass"},
-    {name: "Igor Stalyarow", paid: true, ticket: "businessclass"},
+    {name: "Igor Stalyarow", paid: true, ticket: "coach"},
     {name: "Daria Khamenya", paid: false, ticket: "businessclass"}
 ];
 //                                     CHECK PAYMENT AND PROHIBITION         //
@@ -74,21 +74,52 @@ processPassengers(passengers, printPassenger);
 //                                             SERVICE                                 //
 
 function serveCustomer(passenger) {
+    var getDrinkOrderFunction = createDrinkOrder(passenger);
+    var getDinnerOrderFunction = createDinnerOrder(passenger);
+    getDrinkOrderFunction();
+    getDinnerOrderFunction();
+    // turn on TV
+}
+
+function createDrinkOrder(passenger) {
+    var orderFunction;
     if (passenger.ticket === "businessclass") {
-        alert("Would you like a beer or wine?");
+        orderFunction = function () {
+            console.log("Would you like a beer or wine?");
+        }
+    } else if (passenger.ticket === "firstclass") {
+        orderFunction = function () {
+            console.log("Your choice is mineral water, cola or juice.");
+        }
     } else {
-      alert("Your choice is mineral water, cola or juice.");  
+        orderFunction = function () {
+            console.log("Would you like a mineral water?");
+        }
+    }
+    return orderFunction;
+}
+
+function createDinnerOrder(passenger) {
+    var orderFunction;
+    if (passenger.ticket === "businessclass") {
+        orderFunction = function () {
+            console.log("Do you want chicken or pasta?");
+        }
+    } else if (passenger.ticket === "firstclass") {
+        orderFunction = function () {
+            console.log("Do you want a cheese plate or snacks?");
+        }
+    } else {
+        orderFunction = function () {
+            console.log("Do you want nuts or chips?");
+        }
+    }
+    return orderFunction;
+}
+
+function servePassengers(passengers) {
+    for (var i = 0; i < passengers.length; i++ ) {
+        serveCustomer(passengers[i]);
     }
 }
-function f() {
-    
-}
-
-
-
-
-
-
-
-
-
+servePassengers(passengers);
